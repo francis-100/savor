@@ -30,8 +30,8 @@ const App = () => {
     <div>
       <Navbar />
       <Menu addToOrder={addToOrder} />
-      <OrderForm onSubmit={submitForm} />
       <OrderTable {...order} formData={formData} isOrderUpdated={isOrderUpdated} />
+      <OrderForm onSubmit={submitForm} />
       <Footer />
     </div>
   );
