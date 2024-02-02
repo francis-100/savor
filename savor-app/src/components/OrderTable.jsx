@@ -9,37 +9,37 @@ const OrderTable = ({ selectedItems, quantities, total, formData, isOrderUpdated
   }, [isOrderUpdated]);
 
   return (
-    <div>
-      <h2>{isUpdate ? 'Order Updated' : 'Your Order'}</h2>
-      <table>
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
+      <h2 className="text-2xl font-bold mb-4">{isUpdate ? 'Order Updated' : 'Your Order'}</h2>
+      <table className="w-full mb-4">
         <thead>
           <tr>
-            <th>Food</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Location/Table No.</th>
-            <th>Total</th>
+            <th className="border px-4 py-2">Food</th>
+            <th className="border px-4 py-2">Quantity</th>
+            <th className="border px-4 py-2">Price</th>
+            <th className="border px-4 py-2">Location/Table No.</th>
+            <th className="border px-4 py-2">Total</th>
           </tr>
         </thead>
         <tbody>
           {selectedItems.map((item, index) => (
-            <tr key={index}>
-              <td>{item.name}</td>
-              <td>{quantities[index]}</td>
-              <td>Ksh. {item.price}</td>
-              <td>
+            <tr key={index} className="border-t">
+              <td className="border px-4 py-2">{item.name}</td>
+              <td className="border px-4 py-2">{quantities[index]}</td>
+              <td className="border px-4 py-2">Ksh. {item.price}</td>
+              <td className="border px-4 py-2">
                 {formData && formData.isOnsite
                   ? formData.tableNumber || 'Default Table'
                   : formData && formData.location
                   ? formData.location
                   : 'Default Location'}
               </td>
-              <td>Ksh. {item.price * quantities[index]}</td>
+              <td className="border px-4 py-2">Ksh. {item.price * quantities[index]}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <p>Total: Ksh. {total}</p>
+      <p className="text-xl font-bold">Total: Ksh. {total}</p>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+// src/components/Menu.jsx
 import React, { useState } from 'react';
 
 const Menu = ({ addToOrder }) => {
@@ -35,19 +36,27 @@ const Menu = ({ addToOrder }) => {
   };
 
   return (
-    <div>
-      <h2>Menu</h2>
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Menu</h2>
       <ul>
         {menuItems.map((item, index) => (
-          <li key={index}>
-            {item.name} - Ksh. {item.price}
-            <button type='button' onClick={() => handleIncrease(index)}>+</button>
-            {quantities[index]}
-            <button type='button' onClick={() => handleDecrease(index)}>-</button>
+          <li key={index} className="flex items-center justify-between mb-2">
+            <span>
+              {item.name} - Ksh. {item.price}
+            </span>
+            <div className="flex items-center">
+              <button type="button" onClick={() => handleIncrease(index)} className="mr-2 bg-blue-500 text-white px-3 py-1 rounded">
+                +
+              </button>
+              <span>{quantities[index]}</span>
+              <button type="button" onClick={() => handleDecrease(index)} className="ml-2 bg-blue-500 text-white px-3 py-1 rounded">
+                -
+              </button>
+            </div>
           </li>
         ))}
       </ul>
-      <button type="button" onClick={addToOrderHandler}>
+      <button type="button" onClick={addToOrderHandler} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">
         Submit Order
       </button>
     </div>

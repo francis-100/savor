@@ -38,33 +38,58 @@ const OrderForm = ({ onSubmit }) => {
   };
 
   return (
-    <div>
-      <h2>Order Form</h2>
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Order Form</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        <label className="block mb-4">
+          <span className="text-lg">Name:</span>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full border p-2 rounded-md"
+            required
+          />
         </label>
-        <br />
-        <label>
-          Phone:
-          <input type="tel" value={phone} onChange={handlePhoneChange} required />
+        <label className="block mb-4">
+          <span className="text-lg">Phone:</span>
+          <input
+            type="tel"
+            value={phone}
+            onChange={handlePhoneChange}
+            className="w-full border p-2 rounded-md"
+            required
+          />
         </label>
-        <br />
-        <label>
-          Onsite:
-          <input type="checkbox" checked={isOnsite} onChange={handleOnsiteChange} />
+        <label className="block mb-4">
+          <span className="text-lg">Onsite:</span>
+          <input
+            type="checkbox"
+            checked={isOnsite}
+            onChange={handleOnsiteChange}
+            className="ml-2"
+          />
         </label>
-        <br />
         {isOnsite ? (
-          <label>
-            Table Number:
-            <input type="number" value={tableNumber} onChange={(e) => setTableNumber(e.target.value)} required />
+          <label className="block mb-4">
+            <span className="text-lg">Table:</span>
+            <input
+              type="number"
+              value={tableNumber}
+              onChange={(e) => setTableNumber(e.target.value)}
+              className="w-full border p-2 rounded-md"
+              required
+            />
           </label>
         ) : (
-          <label>
-            Location:
-            <select value={location} onChange={(e) => setLocation(e.target.value)} required>
+          <label className="block mb-4">
+            <span className="text-lg">Location:</span>
+            <select
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="w-full border p-2 rounded-md"
+              required
+            >
               <option value="" disabled hidden>
                 Select Location
               </option>
@@ -74,8 +99,12 @@ const OrderForm = ({ onSubmit }) => {
             </select>
           </label>
         )}
-        <br />
-        <button type="submit">Complete Order</button>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+        >
+          Complete Order
+        </button>
       </form>
     </div>
   );
