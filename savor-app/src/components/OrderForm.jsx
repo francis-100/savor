@@ -12,8 +12,21 @@ const OrderForm = ({ onSubmit }) => {
     setIsOnsite(!isOnsite);
   };
 
+  const handlePhoneChange = (e) => {
+    // Allow only numbers and limit to 10 digits
+    const input = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setPhone(input);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Check if all fields are filled before submitting
+    if (!name || !phone || (isOnsite && !tableNumber) || (!isOnsite && !location)) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
     const formData = {
       name,
       phone,
@@ -30,12 +43,12 @@ const OrderForm = ({ onSubmit }) => {
       <form onSubmit={handleSubmit}>
         <label>
           Name:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
         </label>
         <br />
         <label>
           Phone:
-          <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <input type="tel" value={phone} onChange={handlePhoneChange} required />
         </label>
         <br />
         <label>
@@ -46,16 +59,23 @@ const OrderForm = ({ onSubmit }) => {
         {isOnsite ? (
           <label>
             Table Number:
-            <input type="text" value={tableNumber} onChange={(e) => setTableNumber(e.target.value)} />
+            <input type="number" value={tableNumber} onChange={(e) => setTableNumber(e.target.value)} required />
           </label>
         ) : (
           <label>
             Location:
-            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
+            <select value={location} onChange={(e) => setLocation(e.target.value)} required>
+              <option value="" disabled hidden>
+                Select Location
+              </option>
+              <option value="Sample Location 1">Texas</option>
+              <option value="Sample Location 2">New York</option>
+              {/* Add more options as needed */}
+            </select>
           </label>
         )}
         <br />
-        <button type="submit">Add to Order</button>
+        <button type="submit">Complete Order</button>
       </form>
     </div>
   );

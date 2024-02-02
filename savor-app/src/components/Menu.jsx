@@ -1,4 +1,3 @@
-// src/components/Menu.jsx
 import React, { useState } from 'react';
 
 const Menu = ({ addToOrder }) => {
@@ -9,13 +8,11 @@ const Menu = ({ addToOrder }) => {
   ];
 
   const [quantities, setQuantities] = useState(Array(menuItems.length).fill(0));
-  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
   const handleIncrease = (index) => {
     const newQuantities = [...quantities];
     newQuantities[index]++;
     setQuantities(newQuantities);
-    setIsOrderPlaced(false); // Reset order placed flag
   };
 
   const handleDecrease = (index) => {
@@ -24,7 +21,6 @@ const Menu = ({ addToOrder }) => {
       newQuantities[index]--;
     }
     setQuantities(newQuantities);
-    setIsOrderPlaced(false); // Reset order placed flag
   };
 
   const calculateTotal = () => {
@@ -34,16 +30,8 @@ const Menu = ({ addToOrder }) => {
   };
 
   const addToOrderHandler = () => {
-    if (isOrderPlaced) {
-      // If order is already placed, update the order
-      const selectedItems = menuItems.filter((item, index) => quantities[index] > 0);
-      addToOrder(selectedItems, [...quantities], calculateTotal(), true);
-    } else {
-      // If it's a new order, add to the order
-      const selectedItems = menuItems.filter((item, index) => quantities[index] > 0);
-      addToOrder(selectedItems, [...quantities], calculateTotal(), false);
-      setIsOrderPlaced(true);
-    }
+    const selectedItems = menuItems.filter((item, index) => quantities[index] > 0);
+    addToOrder(selectedItems, [...quantities], calculateTotal());
   };
 
   return (
@@ -60,7 +48,7 @@ const Menu = ({ addToOrder }) => {
         ))}
       </ul>
       <button type="button" onClick={addToOrderHandler}>
-        {isOrderPlaced ? 'Update Order' : 'Add to Order'}
+        Submit Order
       </button>
     </div>
   );
